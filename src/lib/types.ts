@@ -8,8 +8,8 @@ export function getUserDataSelect(loggedInUserId: string) {
     username: true,
     displayName: true,
     avatarUrl: true,
-    bio:true,
-    createdAt:true,
+    bio: true,
+    createdAt: true,
     followers: {
       where: {
         followerId: loggedInUserId,
@@ -21,23 +21,42 @@ export function getUserDataSelect(loggedInUserId: string) {
     _count: {
       select: {
         followers: true,
-        posts:true,
+        posts: true,
       },
     },
   } satisfies Prisma.UserSelect;
 }
 
-export type UserData = Prisma.UserGetPayload<{select:ReturnType<typeof getUserDataSelect>}>;
+export type UserData = Prisma.UserGetPayload<{
+  select: ReturnType<typeof getUserDataSelect>;
+}>;
 
-export function getPostDataInclude(loggedInUserId : string){
+export function getPostDataInclude(loggedInUserId: string) {
   return {
     user: {
       select: getUserDataSelect(loggedInUserId),
     },
-    attachments:true,
+    attachments: true,
+    likes: {
+      where: {
+        userId: loggedInUserId,
+      },
+      select: {
+        userId: true,
+      },
+    },
+    bookmarks: {
+      where: {
+        userId: loggedInUserId,
+      },
+    },
+    _count: {
+      select: {
+        likes: true,
+      },
+    },
   } satisfies Prisma.PostInclude;
 }
-
 
 export type PostData = Prisma.PostGetPayload<{
   include: ReturnType<typeof getPostDataInclude>;
@@ -51,4 +70,13 @@ export interface PostsPage {
 export interface FollowersInfo {
   followers: number;
   isFollowedByUser: boolean;
+}
+
+export interface LikeInfo {
+  likes: number;
+  isLikedByUser: boolean;
+}
+
+export interface BookmarkInfo {
+  isBookmarkedByUser: boolean;
 }
