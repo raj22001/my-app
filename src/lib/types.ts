@@ -85,6 +85,31 @@ export interface CommentsPage {
   previousCursor: string | null;
 }
 
+export const notificationsInclude = {
+  issuer:{
+    select:{
+      username: true,
+      displayName: true,
+      avatarUrl: true,
+    }
+  },
+  post:{
+    select:{
+      content: true
+    }
+  }
+} satisfies Prisma.NotificationInclude;
+
+export type NotificationData = Prisma.NotificationGetPayload<{
+  include: typeof notificationsInclude;
+}>;
+
+export interface NotificationPage {
+  notifications: NotificationData[];
+  nextCursor: string | null;
+}
+
+
 export interface FollowersInfo {
   followers: number;
   isFollowedByUser: boolean;
@@ -97,4 +122,12 @@ export interface LikeInfo {
 
 export interface BookmarkInfo {
   isBookmarkedByUser: boolean;
+}
+
+export interface NotificationsCountInfo{
+  unreadCount: number;
+}
+
+export interface MessageCountInfo {
+  unreadCount: number;
 }
