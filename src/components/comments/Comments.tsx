@@ -11,7 +11,7 @@ interface CommentsProps {
 }
 
 export default function Comments({ post }: CommentsProps) {
-  const { data, fatchNextPage, hasNextPage, isFetching, status } =
+  const { data, fetchNextPage, hasNextPage, isFetching, status } =
     useInfiniteQuery({
       queryKey: ["comments", post.id],
       queryFn: ({ pageParam }) =>
@@ -39,7 +39,7 @@ export default function Comments({ post }: CommentsProps) {
           variant="link"
           className="mx-auto block"
           disabled={isFetching}
-          onClick={() => fatchNextPage()}
+          onClick={() => fetchNextPage()}
         >
           Load Previous comments
         </Button>
