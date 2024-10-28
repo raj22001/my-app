@@ -11,7 +11,7 @@ import { redirect } from "next/navigation";
 
 export async function login(
   credentials: LoginValues,
-): promises<{ error: string }> {
+): Promise<{ error: string }> {
   try {
     const { username, password } = loginSchema.parse(credentials);
 
