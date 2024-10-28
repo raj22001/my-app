@@ -9,7 +9,7 @@ import {
 import { usePathname, useRouter } from "next/navigation";
 import { deletePost } from "./actions";
 
-export function useDeletePostMutation(post: PostData) {
+export function useDeletePostMutation() {
   const { toast } = useToast();
 
   const queryClient = useQueryClient();
