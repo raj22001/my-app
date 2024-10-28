@@ -8,7 +8,7 @@ import { Button } from "./ui/button";
 import kyInstance from "@/lib/ky";
 
 interface FollowButtonProps {
-  userId: String;
+  userId: string;
   initialState: FollowersInfo;
 }
 
