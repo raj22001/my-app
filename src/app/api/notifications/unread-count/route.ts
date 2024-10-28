@@ -10,7 +10,7 @@ export async function GET() {
             return Response.json({error:"Unauthorized"},{status:401});
         }
 
-        const count = await prisma.notification.count({
+        const unreadCount = await prisma.notification.count({
             where:{
                 recipientId:user.id,
                 read:false
