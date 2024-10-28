@@ -3,13 +3,13 @@
 
 import { Button } from "@/components/ui/button";
 import kyInstance from "@/lib/ky";
-import { NotificationsCountInfo } from "@/lib/types";
+import { NotificationCountInfo  } from "@/lib/types";
 import { useQuery } from "@tanstack/react-query";
 import { Bell } from "lucide-react";
 import Link from "next/link";
 
 interface NotificationsButtonProps {
-  initialState: NotificationsCountInfo;
+  initialState: NotificationCountInfo ;
 }
 
 export default async function NotificationsButton({
@@ -20,7 +20,7 @@ export default async function NotificationsButton({
     queryFn: () =>
       kyInstance
         .get("api/notifications/unread-count")
-        .json<NotificationsCountInfo>(),
+        .json<NotificationCountInfo >(),
     initialData: initialState,
     refetchInterval: 60 * 1000,
   });
